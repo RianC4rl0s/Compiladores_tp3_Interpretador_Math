@@ -1,0 +1,12 @@
+(4+5)*2/3
+pow(4,3)
+n = 16
+sqrt( n )
+total = 0
+x = 5
+y = 6
+if(x < y ) total = total + 1 
+total
+print (4 + 5)
+print ("Ola Mundo", 2)
+print("teste")
