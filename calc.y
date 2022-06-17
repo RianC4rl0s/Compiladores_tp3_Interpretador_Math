@@ -116,7 +116,7 @@ char* handleString(char* text, int size){ //Ajustando texto
 
 	char* newText = new char[size + 1]; // criando cadeia de char do tamanho do texto
     for (int i = 0; i < size - 1; i++)  // retira a ultima caractere , no caso "
-        newText[i] = *(text + 1  + i);//inicia a nova string em a caractere  "
+        newText[i] = *(text + 1  + i);//inicia a nova string sem a caractere  "
     newText[size] = 0;
     return newText;
 }

@@ -8,13 +8,13 @@
 %option noyywrap
 
 digito	[0-9]
-letra_	[a-zA-ZáàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ_]
+letra_	[a-zA-Z_]
 pontdig {digito}*"."?{digito}+
 digpont {digito}+"."
 oper    if|print|sqrt|pow 
 numero  {pontdig}|{digpont}
 id		{letra_}({letra_}|{digito})*
-text    \"[a-zA-z0-9,.\\\/ ]*\"
+text    \"[a-zA-z0-9,.\\\/áàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ:; ]*\"
 %%
 
 [\t ]+		{ ; /* ignora espaço em branco */ }
@@ -37,7 +37,6 @@ text    \"[a-zA-z0-9,.\\\/ ]*\"
 ">="        { return MEQUALS; }
 "<"         { return LESS; }
 ">"         { return MORE; }
-<<EOF>>     {return yytext[0];}
 .|\n		{ return yytext[0]; }
 
 %%

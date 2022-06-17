@@ -9,4 +9,8 @@ if(x < y ) total = total + 1
 total
 print (4 + 5)
 print ("Ola Mundo", 2)
-print("teste")
+print("teste ")
+n = 1
+if(n ==1) print("teste: ", n)
+k= 10
+if(k <= 100) print("tAèAFÀSCÀSREdaffvaâÃÔ ", k)
