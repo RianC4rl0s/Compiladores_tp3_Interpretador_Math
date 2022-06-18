@@ -14,7 +14,7 @@ digpont {digito}+"."
 oper    if|print|sqrt|pow 
 numero  {pontdig}|{digpont}
 id		{letra_}({letra_}|{digito})*
-text    \"[a-zA-z0-9,.\\\/áàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ:; ]*\"
+text    \"[a-zA-z0-9,.\\\/áàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ:;=\-\+\!? ]*\"
 %%
 
 [\t ]+		{ ; /* ignora espaço em branco */ }

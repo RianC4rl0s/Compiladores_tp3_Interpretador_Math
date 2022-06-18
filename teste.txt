@@ -21,3 +21,4 @@ n2 = 7.5
 n3 = 6.5
 parcial = (n1*4 + n2*5 + n3*6) / 15 
 if (parcial >= 7) print("aprovado")
+print (" ? ! - + = : ;")
