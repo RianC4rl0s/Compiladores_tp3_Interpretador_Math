@@ -7,10 +7,15 @@ x = 5
 y = 6
 if(x < y ) total = total + 1 
 total
-print (4 + 5)
-print ("Ola Mundo", 2)
+print (4 + 5, " teste")
+print ("Ola Mundo ", 2)
 print("teste ")
 n = 1
 if(n ==1) print("teste: ", n)
 k= 10
 if(k <= 100) print("tAèAFÀSCÀSREdaffvaâÃÔ ", k)
+n1 = 9.0
+n2 = 7.5
+n3 = 6.5
+parcial = (n1*4 + n2*5 + n3*6) / 15 
+if (parcial >= 7) print("aprovado")

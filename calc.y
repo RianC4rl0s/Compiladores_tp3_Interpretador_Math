@@ -2,7 +2,7 @@
 /* analisador sintático para uma calculadora */
 /* com suporte a definição de variáveis */
 #include <iostream>
-#include <string>
+
 #include <unordered_map>
 #include <math.h>
 #include <sstream>
@@ -16,12 +16,10 @@ int yylex(void);
 int yyparse(void);
 void yyerror(const char *);
 /*funções para manipular a string*/
-string toString(float f);
-char* handleString(char* text, int size);
+void toString(float f);
+void handleString(char* text, int size);
 /* tabela de símbolos */
 unordered_map<string,double> variables;
-/*criando a stringo para o cout*/
-string sysout = "";
 %}
 
 %union {
@@ -51,17 +49,17 @@ math: math calc '\n'
 	| calc '\n'
 	;
 
-calc: ID '=' expr 								{ variables[$1] = $3;								 	} 	
-	| IF '(' expr ')' PRINT '(' argment ')'     { if ($3 == 1 ) cout << sysout << "\n"; sysout =  "";	}
-	| IF '(' expr ')' ID '=' expr       		{ if ($3 == 1 ) variables[$5] = $7;  					}
-	| PRINT '(' argment ')' 					{cout << sysout << "\n"; sysout =  "";					}
-	| expr										{ cout << "= " << $1 << "\n"; 							}
+calc: ID '=' expr 								{ variables[$1] = $3;/*abaixo estão as condições de if*/  } 	
+	| IF '(' expr ')' PRINT '(' argment ')'     { if ($3 == 1 ) cout << "\n";                       	  }
+	| IF '(' expr ')' ID '=' expr       		{ if ($3 == 1 ) variables[$5] = $7;/*se verdadeiro faça*/ }
+	| PRINT '(' argment ')' 					{cout<< "\n"	;	/*Pula 1 linha paara cada print*/	  }
+	| expr										{/*cout << "= " << $1 << "\n";*/}
 	| '\n'
 	; 
 argment: buff ',' argment				
 	| buff								
-buff: TEXT					{sysout.append(handleString($1, strlen($1) - 1));/*mandando o texto menos a caractere de final de linha*/}
-	| expr					{sysout.append(toString($1));/*convertendo para string*/}
+buff: TEXT					{handleString($1, strlen($1) - 1);/*mandando o texto menos a caractere de final de linha*/}
+	| expr					{toString($1);/*convertendo para string*/}
 expr: expr '+' expr			{ $$ = $1 + $3; }
 	| expr '-' expr   		{ $$ = $1 - $3; }
 	| expr '*' expr			{ $$ = $1 * $3; }
@@ -70,7 +68,7 @@ expr: expr '+' expr			{ $$ = $1 + $3; }
 		if ($3 == 0)
 			yyerror("divisão por zero");
 		else
-			$$ = $1 / $3; 
+			$$ = $1 / $3;  //Abaixo defini as possiveis expressões
 	}
 	| '(' expr ')'					{ $$ = $2; 				}
 	| '-' expr %prec UMINUS 		{ $$ = - $2; 			}
@@ -107,18 +105,20 @@ int main(int argc, char ** argv )
 	yyparse();
 }
 
-string toString(float f) {//Pesquisei na internet e achei essa solução para convenrter float do string
+void toString(float f) {//Pesquisei na internet e achei essa solução para convenrter float do string
     std::ostringstream st;
     st << f;
-    return st.str();
+    cout << st.str();
+	//return st.str();
 }
-char* handleString(char* text, int size){ //Ajustando texto
+void handleString(char* text, int size){ //Ajustando texto
 
 	char* newText = new char[size + 1]; // criando cadeia de char do tamanho do texto
     for (int i = 0; i < size - 1; i++)  // retira a ultima caractere , no caso "
         newText[i] = *(text + 1  + i);//inicia a nova string sem a caractere  "
     newText[size] = 0;
-    return newText;
+    cout << newText;
+	//return newText;
 }
 void yyerror(const char * s)
 {
